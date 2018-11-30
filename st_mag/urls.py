@@ -15,16 +15,27 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls import url
 from django.http import HttpResponse
+from django.shortcuts import render
 
 def site(request):
-    return HttpResponse("<h1> ONE SITE </h1>")
+    return render(request,"index.html")
 
 def hello_python(request):
-    return HttpResponse("<h1> ONE SITE PYTHON </h1>")
+    return render(request,"python.html")
+
+def hello_python_old(request, a, b):
+    s = int(a) + int(b) 
+    print ('----------------------'+ str(s)+'----------------------')
+    return HttpResponse("<h1> ONE SITE PYTHON </h1>" + str(s) )
 
 urlpatterns = [
-    path('', site, name='home'),
-    path('python/', hello_python, name='home'),
+    path('', site),
+    url(r'^python/$', hello_python),
     path('admin/', admin.site.urls),
 ]
+
+
+
+
