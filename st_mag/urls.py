@@ -14,25 +14,17 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
 from django.conf.urls import url
-from django.http import HttpResponse
-from django.shortcuts import render
-
-def site(request):
-    return render(request,"index.html")
-
-def hello_python(request):
-    return render(request,"python.html")
-
-def hello_python_old(request, a, b):
-    s = int(a) + int(b) 
-    print ('----------------------'+ str(s)+'----------------------')
-    return HttpResponse("<h1> ONE SITE PYTHON </h1>" + str(s) )
+from django.urls import path
+from hotel.views import site, test, hello_python, sum_two, ofice_hotel, proba
 
 urlpatterns = [
     path('', site),
     url(r'^python/$', hello_python),
+	url(r'^new/$', test),
+	url(r'^ofice_hotel/$', ofice_hotel),
+    url(r'^proba/$', proba),
+	url(r'^sum/(\d+)/(\d+)/$', sum_two),
     path('admin/', admin.site.urls),
 ]
 
